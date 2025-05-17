@@ -37,7 +37,7 @@ function Topping() {
   const [isCheckout,setIsCheckOut] = useState(false)
 
   const hdlClickSelect = (price,name,isClick) => {
-    if(isClick) {
+    if(selectTopping.some((item) => item.name === name)) {
       
       setSelectTopping(selectTopping.filter((item) => item.name !== name))
     } else {
@@ -47,28 +47,30 @@ function Topping() {
   }
 
   const total = selectTopping.reduce((acc,curr) => acc + curr.price,0)
-  console.log('totallllll',total)
+  // console.log('totallllll',total)
 
-  console.log('selectTopping', selectTopping)
+  // console.log('selectTopping', selectTopping)
   return (
     <div>
-    <div className="space-y-2">
+    <div className="space-y-2 ">
       {toppings.map((item,i) => (
-        <ToppingItem key={i} item={item} hdlClickSelect={hdlClickSelect} />
+        <ToppingItem key={i} item={item} hdlClickSelect={hdlClickSelect} 
+        isClick={selectTopping.some((el) => el.name === item.name)}
+        />
     ))}
-    <p>Total : THB {total.toFixed(2)}</p>
+    <p className=" text-xl text-pink-700 font-bold " >Total : THB {total.toFixed(2)}</p>
     <button 
-    className={`btn p-5 ${selectTopping.length > 0 ? "bg-pink-300 skeleton" : "bg-gray-400"} duration-200`}
+    className={`btn p-5 shadow-lg shadow-pink-500 ${selectTopping.length > 0 ? "bg-pink-300 skeleton" : "bg-gray-400 text-white"} duration-200`}
     onClick={()=>setIsCheckOut((prev)=>!prev)}>Check Out</button>
     </div>
     <div>
       {isCheckout && selectTopping.length > 0 && (
 
-      <div className="my-4 py-4 px-6 space-y-4 bg-pink-300 rounded-3xl">
+      <div className="text-white my-4 py-4 px-6 space-y-4 bg-pink-300 rounded-3xl shadow-lg shadow-pink-500 ">
         {selectTopping.map((item) => (
           <CheckOut key={item.name} item={item} />
         ))}
-      <p className="font-bold">Total : {total.toFixed(2)}</p>
+      <p className="text-xl text-pink-900 font-bold skeleton p-2 text-center">Total : {total.toFixed(2)}</p>
       </div>
       )}
 

@@ -3,7 +3,7 @@ function CheckOut({item:{name,price}}) {
   
       <div className="flex justify-between items-center">
         <p>{name}</p>
-        <p>THB: {price.toFixed(2)}</p>
+        <p>THB {price.toFixed(2)}</p>
       </div>
     
   )
