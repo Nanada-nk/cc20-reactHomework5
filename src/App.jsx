@@ -5,7 +5,7 @@ function App() {
 
 
   return (
-    <div className="w-100 mx-auto my-30 space-y-6">
+    <div className="w-80 mx-auto my-30 space-y-6">
       <h1 className="text-4xl">Select Topping</h1>
       <Topping />
       
